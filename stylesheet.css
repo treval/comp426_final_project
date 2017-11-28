@@ -1,104 +1,123 @@
-@import "https://designmodo.github.io/Flat-UI/dist/css/flat-ui.min.css";
-@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css";
-@import "https://daneden.github.io/animate.css/animate.min.css";
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
 
-#wrapper.toggled {
-  padding-left: 220px;
+body {
+  overflow-x: hidden;
 }
-#wrapper.toggled #sidebar-wrapper {
-  width: 220px;
-}
-#wrapper.toggled #page-content-wrapper {
-  margin-right: -220px;
-  position: absolute;
-}
-#sidebar-wrapper {
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  background: #99badd;
-  height: 100%;
-  left: 220px;
-  margin-left: -220px;
-  overflow-x: hidden;
-  overflow-y: auto;
   transition: all 0.5s ease;
-  width: 0;
+}
+
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+#sidebar-wrapper {
   z-index: 1000;
-}
-#sidebar-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.hamburger {
-  border: thin solid grey;
-  display: block;
-  height: 32px;
-  margin-left: 15px;
   position: fixed;
-  top: 20px;
-  width: 32px;
-  z-index: 999;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-.hamburger.is-closed .hamb-top {
-  -webkit-transition: all 0.35s ease-in-out;
-  background-color: rgba(255, 255, 255, 0.7);
-  top: 5px;
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
 }
-.hamburger.is-closed .hamb-middle {
-  background-color: rgba(255, 255, 255, 0.7);
-  margin-top: -2px;
-  top: 50%;
-}
-.hamburger.is-closed .hamb-bottom {
-  -webkit-transition: all 0.35s ease-in-out;
-  background-color: rgba(255, 255, 255, 0.7);
-  bottom: 5px;
-}
-.hamburger.is-closed .hamb-top,
-.hamburger.is-closed .hamb-middle,
-.hamburger.is-closed .hamb-bottom,
-.hamburger.is-open .hamb-top,
-.hamburger.is-open .hamb-middle,
-.hamburger.is-open .hamb-bottom {
-  height: 4px;
-  left: 0;
-  position: absolute;
+
+#page-content-wrapper {
   width: 100%;
+  position: absolute;
+  padding: 15px;
 }
-.hamburger.is-open .hamb-top {
-  -webkit-transform: rotate(45deg);
-  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.73, 1, 0.28, 0.08);
-  background-color: #fff;
-  margin-top: -2px;
-  top: 50%;
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
 }
-.hamburger.is-open .hamb-middle {
-  background-color: #fff;
-  display: none;
+
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.hamburger.is-open .hamb-bottom {
-  -webkit-transform: rotate(-45deg);
-  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.73, 1, 0.28, 0.08);
-  background-color: #fff;
-  margin-top: -2px;
-  top: 50%;
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
 }
-.hamburger.is-open:before {
-  -webkit-transform: translate3d(0, 0, 0);
-  -webkit-transition: all 0.35s ease-in-out;
-  color: #ffffff;
-  content: '';
+
+.sidebar-nav li a {
   display: block;
-  font-size: 14px;
-  line-height: 32px;
-  opacity: 0;
-  text-align: center;
-  width: 100px;
+  text-decoration: none;
+  color: #999999;
 }
-.hamburger.is-open:hover before {
-  -webkit-transform: translate3d(-100px, 0, 0);
-  -webkit-transition: all 0.35s ease-in-out;
-  display: block;
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
 }
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.sidebar-nav>.sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 0;
+  }
+  #wrapper.toggled {
+    padding-left: 250px;
+  }
+  #sidebar-wrapper {
+    width: 0;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
