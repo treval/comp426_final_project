@@ -6,6 +6,9 @@
 
 body {
   overflow-x: hidden;
+  background-image: url("resources/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #wrapper {
@@ -121,3 +124,17 @@ body {
   }
 }
 
+.content {
+  background-color: rgba(222, 219, 223, 0.75);
+  width: 800px;
+  height: 1000px;
+  margin: auto;
+  border: 3px solid green;
+  padding: 10px;
+}
+
+.intro_text_box {
+  width: inherit;
+  padding-left: 20px;
+  padding-right: 50px;
+}
