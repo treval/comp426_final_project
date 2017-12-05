@@ -1,0 +1,19 @@
+Event:
+	id: INT, primary key
+	name: CHAR(80) title of event
+	date: DATE date of event, format MM/DD/YYYY
+	time: TIME time of event, format HH:MM
+	type: CHAR(20) kind of event (kayak, powwow, ecological education, cultural education, miscellaneous)
+	description: CHAR(140) short description of the event
+
+User:
+	id: INT, primary key
+	first: CHAR(20) first name of user
+	last: CHAR(20) last name of user
+	email: CHAR(40) email of user
+
+Rsvp:
+	id: INT, primary key
+	guests: INT, number of guests signed up by user
+	uid: INT, id of user signing up, FOREIGN KEY references User
+	eid: INT, id of event signed up for, FOREIGN KEY references Event
