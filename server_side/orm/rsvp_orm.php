@@ -126,6 +126,7 @@ public function getJSON() {
     'guest' => $this->guest,
     'uid' => $this->uid,
     'eid' => $this->eid
+  );
   return json_encode($json_obj);
 }
 }
