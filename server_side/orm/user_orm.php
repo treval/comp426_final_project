@@ -64,7 +64,7 @@ class User {
 
 	private function __construct($id, $first, $last, $email) {
 		$this->id = $id;
-		$this->first = $fisrt;
+		$this->first = $first;
 		$this->last = $last;
 		$this->email = $email;
 	}
@@ -74,7 +74,7 @@ class User {
 	}
 
 	public function getFirst() {
-		return $this->title;
+		return $this->first;
 	}
 
 	public function getLast() {
@@ -86,7 +86,7 @@ class User {
 	}
 
 	public function setFirst($first) {
-		$this->first = $firts;
+		$this->first = $first;
 		return $this->update();
 	}
 
@@ -120,7 +120,6 @@ class User {
 	}
 
 	public function getJSON() {
-
 		$json_obj = array('id' => $this->id,
 			'first' => $this->first,
 			'last' => $this->last,
