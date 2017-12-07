@@ -2,14 +2,14 @@ var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/treval/final_p
 
 $(document).ready(function () {
 
-  $.ajax(url_base + "/user.php",
+  $.ajax(url_base + "/event.php",
    {type: "GET",
    dataType: "json",
-   success: function(user_ids, status, jqXHR) {
-       for (var i=0; i<user_ids.length; i++) {
-         load_user_item(user_ids[i]);
+   success: function(event_ids, status, jqXHR) {
+       for (var i=0; i<event_ids.length; i++) {
+         load_event_item(event_ids[i]);
        }
-     }
+    }
   });
 
   var trigger = $('.hamburger'),
@@ -37,32 +37,43 @@ $(document).ready(function () {
   $('[data-toggle="offcanvas"]').click(function () {
     $('#wrapper').toggleClass('toggled');
   });  
+
 });
 
-var User = function(user_json) {
-    this.id = user_json.id;
-    this.first = user_json.first;
-    this.last = user_json.last;
-    this.email = user_json.email;
+var Event = function(event_json) {
+  this.id = event_json.id;
+  this.name = event_json.name;
+  this.scheduled = event_json.scheduled;
+  this.type = event_json.type;
+  this.description = event_json.description
 };
 
-User.prototype.makeUserDiv = function() {
-    var div = $("<div></div>");
-    div.addClass('user');
+Event.prototype.makeCollapseEvent = function() {
 
-    div.data('user', this);
+  var title_div = $("<div data-toggle='collapse' data-target=#"+this.id+"></div>");
+  title_div.addClass('title');
+  title_div.html(this.name+" "+this.scheduled + " <span class='caret'></span>");
 
-    return div;
+  form = $("<div id="+this.id+" class='form-group collapse'></div>");
+
+  form.append("<input type='text' class='form-control' placeholder='First Name'>");
+  form.append("<input type='text' class='form-control' placeholder='Last Name'>");
+  form.append("<input type='text' class='form-control' placeholder='E-mail'>");
+
+  form.append("<button type='submit' class='btn btn-default'>Submit</button>");
+
+
+  $('.event_list').append(title_div);
+  $('.event_list').append(form);
 };
 
-var load_user_item = function (id) {
-  $.ajax(url_base + "/user.php/" + id,
+var load_event_item = function (id) {
+  $.ajax(url_base + "/event.php/" + id,
     {type: "GET",
     dataType: "json",
-    success: function(user_json, status, jqXHR) {
-      console.log(user_json);
-      var u = new User(user_json);
-      $('.event_list').append("<p>"+u.first + " " + u.last + " " + u.email+"<p>");
+    success: function(event_json, status, jqXHR) {
+      var e = new Event(event_json);
+      $('.event_list').append(e.makeCollapseEvent());
     }
   });
 }

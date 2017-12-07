@@ -5,8 +5,7 @@ class Event
 {
   private $id;
   private $name;
-  private $date;
-  private $time;
+  private $scheduled;
   private $type;
   private $description;
 
@@ -17,23 +16,20 @@ class Event
       "trevaldb");
   }
 
-  public static function create($name, $date, $time, $type, $description) {
+  public static function create($name, $scheduled, $type, $description) {
     $mysqli = Event::connect();
 
-    $dstr = "'" . $date->format('Y-m-d') . "'";
-
-    $tstr = "'" . $time->format('H:i') . "'";
+    $dstr = "'" . $scheduled->format('Y-m-d H:i:s') . "'";
 
     $result = $mysqli->query("INSERT INTO Event VALUES (0, " .
      "'" . $mysqli->real_escape_string($name) . "', " .
      $dstr . ", " .
-     $tstr . ", " .
      "'" . $mysqli->real_escape_string($type) . "', " .
      "'" . $mysqli->real_escape_string($description) . ")");
     
     if ($result) {
       $id = $mysqli->insert_id;
-      return new Event($id, $name, $date, $time, $type, $description);
+      return new Event($id, $name, $scheduled, $type, $description);
     }
     return null;
   }
@@ -49,14 +45,11 @@ class Event
 
       $event_info = $result->fetch_array();
 
-      $date = new DateTime($event_info['date']);
-
-      $time = new DateTime($event_info['time']);
+      $scheduled = new DateTime($event_info['scheduled']);
 
       return new Event(intval($event_info['id']),
         $event_info['name'],
-        $date,
-        $time,
+        $scheduled,
         $event_info['type'],
         $event_info['description']);
     }
@@ -77,11 +70,10 @@ class Event
     return $id_array;
   }
 
-  private function __construct($id, $name, $date, $time, $type, $description) {
+  private function __construct($id, $name, $scheduled, $type, $description) {
     $this->id = $id;
     $this->name = $name;
-    $this->date = $date;
-    $this->time = $time;
+    $this->scheduled = $scheduled;
     $this->type = $type;
     $this->description = $description;
   }
@@ -94,12 +86,8 @@ class Event
     return $this->name;
   }
 
-  public function getDate() {
-    return $this->date;
-  }
-
-  public function getTime() {
-    return $this->time;
+  public function getScheduled() {
+    return $this->scheduled;
   }
 
   public function getType() {
@@ -115,13 +103,8 @@ class Event
     return $this->update();
   }
 
-  public function setDate($date) {
-    $this->date = $date;
-    return $this->update();
-  }
-
-  public function setTime($time) {
-    $this->time = $time;
+  public function setScheduled($scheduled) {
+    $this->scheduled = $scheduled;
     return $this->update();
   }
 
@@ -138,21 +121,13 @@ class Event
   private function update() {
     $mysqli = Event::connect();
 
-    $dstr = "'" . $this->date->format('Y-m-d') . "'";
-
-    $tstr = "'" . $this->time->format('H:i') . "'";
+    $dstr = "'" . $this->scheduled->format('Y-m-d H:i:s') . "'";
 
     $result = $mysqli->query("UPDATE Event SET " .
-     "name=" .
-     "'" . $mysqli->real_escape_string($this->name) . "', " .
-     "date=" .
-     $dstr . ", " .
-     "time=" .
-     $tstr . ", ".
-     "type=" .
-     "'" . $mysqli->real_escape_string($this->type) . "', " .
-     "description=" .
-     "'" . $mysqli->real_escape_string($this->description) .
+     "name=" . "'" . $mysqli->real_escape_string($this->name) . "', " .
+     "scheduled=" . $dstr . ", " .
+     "type=" . "'" . $mysqli->real_escape_string($this->type) . "', " .
+     "description=" . "'" . $mysqli->real_escape_string($this->description) .
      " where id=" . $this->id);
     return $result;
   }
@@ -164,14 +139,11 @@ class Event
 
   public function getJSON() {
 
-    $dstr = $this->date->format('Y-m-d');
-
-    $tstr = $this->date->format('H:i');
+    $dstr = $this->scheduled->format('Y-m-d H:i:s');
 
     $json_obj = array('id' => $this->id,
       'name' => $this->name,
-      'date' => $dstr,
-      'time' => $tstr,
+      'scheduled' => $dstr,
       'type' => $this->type,
       'description' => $this->description);
     return json_encode($json_obj);
