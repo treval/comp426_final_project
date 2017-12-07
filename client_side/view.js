@@ -1,4 +1,4 @@
-var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/treval/final_test/server_side";
+var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/treval/final_project/server_side";
 
 $(document).ready(function () {
 
