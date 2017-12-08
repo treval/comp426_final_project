@@ -1,8 +1,7 @@
 Event:
 	id: INT, primary key
 	name: CHAR(80) title of event
-	date: DATE date of event, format MM/DD/YYYY
-	time: TIME time of event, format HH:MM
+	scheduled: DATETIME format = (YYYY-MM-DDTHH:mm:ssZ)
 	type: CHAR(20) kind of event (kayak, powwow, ecological education, cultural education, miscellaneous)
 	description: CHAR(140) short description of the event
 

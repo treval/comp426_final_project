@@ -138,3 +138,9 @@ body {
   padding-left: 20px;
   padding-right: 50px;
 }
+
+/* Event List CSS */
+
+.event_list {
+  border: thin solid black;
+}

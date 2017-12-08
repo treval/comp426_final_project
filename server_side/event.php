@@ -72,23 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
       $new_name = trim($_REQUEST['name']);
     }
 
-    $new_date = false;
+    $new_scheduled = false;
     $new_date_obj = null;
-    if (isset($_REQUEST['date'])) {
-      $new_date = true;
+    if (isset($_REQUEST['scheduled'])) {
+      $new_scheduled = true;
       $date_str = trim($_REQUEST['date']);
       if ($date_str != "") {
         $new_date_obj = new DateTime($date_str);
-      }
-    }
-
-    $new_time = false;
-    $new_time_obj = null;
-    if (isset($_REQUEST['time'])) {
-      $new_time = true;
-      $time_str = trim($_REQUEST['time']);
-      if ($time_str != "") {
-        $new_time_obj = new DateTime($time_str);
       }
     }
 
@@ -106,16 +96,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if ($new_name) {
       $event->setName($new_name);
     }
-    if ($new_date != false) {
-      $event->setDate($new_date_obj);
-    }
-    if ($new_time != false) {
-      $event->setTime($new_time_obj);
+    if ($new_scheduled != false) {
+      $event->setScheduled($new_date_obj);
     }
     if ($new_type) {
       $event->setType($new_type);
     }
-    if ($new_description != false) {
+    if ($new_description) {
       $event->setPriority($new_description);
     }
 
@@ -134,19 +121,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
       $name = trim($_REQUEST['name']);
     }
 
-    $date = null;
-    if (isset($_REQUEST['date'])) {
-      $date_str = trim($_REQUEST['date']);
+    $scheduled = null;
+    if (isset($_REQUEST['scheduled'])) {
+      $date_str = trim($_REQUEST['scheduled']);
       if ($date_str != "") {
-       $date = new DateTime($date_str);
-      }
-    }
-
-    $time = null;
-    if (isset($_REQUEST['time'])) {
-      $time_str = trim($_REQUEST['time']);
-      if ($time_str != "") {
-       $time = new DateTime($time_str);
+        $date = new DateTime($date_str);
       }
     }
 
@@ -161,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     // Create new Event via ORM
-    $new_event = Event::create($name, $date, $time, $type, $description);
+    $new_event = Event::create($name, $scheduled, $type, $description);
 
     // Report if failed
     if ($new_event == null) {
