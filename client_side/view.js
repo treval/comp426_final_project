@@ -12,6 +12,22 @@ $(document).ready(function () {
     }
   });
 
+  $('form').on('submit',
+    function (e) {
+      e.preventDefault();
+      $.ajax(url_base + "/user.php",
+        {type: "POST",
+        dataType: "json",
+        data: $(this).serialize(),
+        success: function(user_json, status, jqXHR) {
+          var u = new User(user_json);
+          alert(success);
+        },
+        error: function(jqXHR, status, error) {
+          alert(jqXHR.responseText);
+        }});
+  });
+
   var trigger = $('.hamburger'),
   overlay = $('.overlay'),
   isClosed = false;
@@ -54,11 +70,11 @@ Event.prototype.makeCollapseEvent = function() {
   title_div.addClass('title');
   title_div.html(this.name+" "+this.scheduled + " <span class='caret'></span>");
 
-  form = $("<div id="+this.id+" class='form-group collapse'></div>");
+  form = $("<form id="+this.id+" class='form-group collapse'></form>");
 
-  form.append("<input type='text' class='form-control' placeholder='First Name'>");
-  form.append("<input type='text' class='form-control' placeholder='Last Name'>");
-  form.append("<input type='text' class='form-control' placeholder='E-mail'>");
+  form.append("<input type='text' name='first' class='form-control' placeholder='First Name'>");
+  form.append("<input type='text' name='last' class='form-control' placeholder='Last Name'>");
+  form.append("<input type='text' name='email' class='form-control' placeholder='E-mail'>");
 
   form.append("<button type='submit' class='btn btn-default'>Submit</button>");
 
