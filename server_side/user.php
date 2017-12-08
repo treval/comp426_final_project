@@ -102,7 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     // Creating a new User item
 
     // Validate values
-
     $first = "";
     if (isset($_REQUEST['first'])) {
       $first = trim($_REQUEST['first']);
@@ -119,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     // Create new User via ORM
+
     $new_user = User::create($first, $last, $email);
 
     // Report if failed

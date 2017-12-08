@@ -20,7 +20,7 @@ class User {
 		$result = $mysqli->query("INSERT INTO User VALUES (0, " .
 			"'" . $mysqli->real_escape_string($first) . "', " .
 			"'" . $mysqli->real_escape_string($last) . "', " .
-			"'" . $mysqli->real_escape_string($email) . "', " . ")");
+			"'" . $mysqli->real_escape_string($email) . "'" . ")");
 
 		if ($result) {
 			$id = $mysqli->insert_id;
@@ -78,11 +78,11 @@ class User {
 	}
 
 	public function getLast() {
-		return $this->note;
+		return $this->last;
 	}
 
 	public function getEmail() {
-		return $this->project;
+		return $this->email;
 	}
 
 	public function setFirst($first) {
@@ -109,8 +109,8 @@ class User {
 			"last=" .
 			"'" . $mysqli->real_escape_string($this->last) . "', " .
 			"email=" .
-			"'" . $mysqli->real_escape_string($this->email) .
-			" where id=" . $this->id);
+			"'" . $mysqli->real_escape_string($this->email) . "'" .
+			"where id=" . $this->id);
 		return $result;
 	}
 
