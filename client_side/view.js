@@ -12,7 +12,7 @@ $(document).ready(function () {
     }
   });
 
-  $('form').on('submit',
+  $('#new_user_form').on('submit',
     function (e) {
       e.preventDefault();
       $.ajax(url_base + "/user.php",
@@ -20,8 +20,9 @@ $(document).ready(function () {
         dataType: "json",
         data: $(this).serialize(),
         success: function(user_json, status, jqXHR) {
-          var u = new User(user_json);
-          alert(success);
+          var e = new Event(user_json);
+          console.log(user_json);
+          console.log(e);
         },
         error: function(jqXHR, status, error) {
           alert(jqXHR.responseText);
