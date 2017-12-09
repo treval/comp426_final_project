@@ -44,75 +44,84 @@ class Rsvp
       intval($rsvp_info['eid']));
    }
    return null;
- }
+  }
 
- public static function getAllIDs() {
-  $mysqli = Rsvp::connect();
+  public static function getAllIDs() {
+    $mysqli = Rsvp::connect();
 
-  $result = $mysqli->query("SELECT id FROM Rsvp");
-  $id_array = array();
+    $result = $mysqli->query("SELECT id FROM Rsvp");
+    $id_array = array();
 
-  if ($result) {
-    while ($next_row = $result->fetch_array()) {
-     $id_array[] = intval($next_row['id']);
-   }
- }
- return $id_array;
+    if ($result) {
+      while ($next_row = $result->fetch_array()) {
+       $id_array[] = intval($next_row['id']);
+      }
+    }
+      return $id_array;
+  }
+
+  public static function findRsvpByEventId($event_id) {
+    $mysqli = Rsvp::connect();
+
+    $result = $mysqli->query("SELECT * FROM User U, Event E, Rsvp R WHERE U.id=R.uid and E.id=R.eid and E.id=" . $event_id);
+
+    return json_encode($result);
+  }
+
+  private function __construct($id, $uid, $eid) {
+    $this->id = $id;
+    $this->uid = $uid;
+    $this->eid = $eid;
+  }
+
+  public function getID() {
+    return $this->id;
+  }
+
+  public function getUid() {
+    return $this->uid;
+  }
+
+  public function getEid() {
+    return $this->eid;
+  }
+
+  public function setUid($uid) {
+    $this->uid = $uid;
+    return $this->update();
+  }
+
+  public function setEid($eid) {
+    $this->eid = $eid;
+    return $this->update();
+  }
+
+  private function update() {
+    $mysqli = Rsvp::connect();
+
+    $result = $mysqli->query("UPDATE Rsvp SET " .
+      "guest=" .
+      "'" . $guest . "', " .
+      "uid=" .
+      "'" . $uid . "', " .
+      "eid=" .
+      "'" . $eid . "'" .
+      " where id=" . $this->id);
+    return $result;
+  }
+
+  public function delete() {
+    $mysqli = Rsvp::connect();
+    $mysqli->query("DELETE FROM Rsvp WHERE id = " . $this->id);
+  }
+
+  public function getJSON() {
+
+    $json_obj = array('id' => $this->id,
+      'uid' => $this->uid,
+      'eid' => $this->eid
+    );
+    return json_encode($json_obj);
+  }
 }
-
-private function __construct($id, $uid, $eid) {
-  $this->id = $id;
-  $this->uid = $uid;
-  $this->eid = $eid;
-}
-
-public function getID() {
-  return $this->id;
-}
-
-public function getUid() {
-  return $this->uid;
-}
-
-public function getEid() {
-  return $this->eid;
-}
-
-public function setUid($uid) {
-  $this->uid = $uid;
-  return $this->update();
-}
-
-public function setEid($eid) {
-  $this->eid = $eid;
-  return $this->update();
-}
-
-private function update() {
-  $mysqli = Rsvp::connect();
-
-  $result = $mysqli->query("UPDATE Rsvp SET " .
-    "guest=" .
-    "'" . $guest . "', " .
-    "uid=" .
-    "'" . $uid . "', " .
-    "eid=" .
-    "'" . $eid . "'" .
-    " where id=" . $this->id);
-  return $result;
-}
-
-public function delete() {
-  $mysqli = Rsvp::connect();
-  $mysqli->query("DELETE FROM Rsvp WHERE id = " . $this->id);
-}
-
-public function getJSON() {
-
-  $json_obj = array('id' => $this->id,
-    'uid' => $this->uid,
-    'eid' => $this->eid
-  );
-  return json_encode($json_obj);
-}
-}
+?>
