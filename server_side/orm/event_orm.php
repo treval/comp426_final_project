@@ -127,7 +127,7 @@ class Event
      "name=" . "'" . $mysqli->real_escape_string($this->name) . "', " .
      "scheduled=" . $dstr . ", " .
      "type=" . "'" . $mysqli->real_escape_string($this->type) . "', " .
-     "description=" . "'" . $mysqli->real_escape_string($this->description) .
+     "description=" . "'" . $mysqli->real_escape_string($this->description) . "'" .
      " where id=" . $this->id);
     return $result;
   }
