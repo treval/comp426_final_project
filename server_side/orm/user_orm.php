@@ -39,7 +39,7 @@ class User {
 			}
 
 			$user_info = $result->fetch_array();
-
+			
 			return new User(intval($user_info['id']),
 				$user_info['first'],
 				$user_info['last'],
@@ -126,6 +126,6 @@ class User {
 			'email' => $this->email);
 		return json_encode($json_obj);
 	}
-
+	
 }
 ?>

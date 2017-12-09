@@ -21,8 +21,6 @@ $(document).ready(function () {
         data: $(this).serialize(),
         success: function(user_json, status, jqXHR) {
           var e = new Event(user_json);
-          console.log(user_json);
-          console.log(e);
         },
         error: function(jqXHR, status, error) {
           alert(jqXHR.responseText);
@@ -67,21 +65,18 @@ var Event = function(event_json) {
 
 Event.prototype.makeCollapseEvent = function() {
 
-  var title_div = $("<div data-toggle='collapse' data-target=#"+this.id+"></div>");
+  var event_div = $("<div class='event_div'></div>");
+
+  var title_div = $("<div></div>");
   title_div.addClass('title');
   title_div.html(this.name+" "+this.scheduled + " <span class='caret'></span>");
 
-  form = $("<form id="+this.id+" class='form-group collapse'></form>");
+  event_div.append(title_div);
+  event_div.append("<div id='new_user_div'><form id='new_user_form'><input name='first' type=text><br><input name='last' type=text><br><input name='email' type=text><br><button type=submit>Create</button></form></div>");
 
-  form.append("<input type='text' name='first' class='form-control' placeholder='First Name'>");
-  form.append("<input type='text' name='last' class='form-control' placeholder='Last Name'>");
-  form.append("<input type='text' name='email' class='form-control' placeholder='E-mail'>");
+  event_div.data('event', this);
+  return event_div;
 
-  form.append("<button type='submit' class='btn btn-default'>Submit</button>");
-
-
-  $('.event_list').append(title_div);
-  $('.event_list').append(form);
 };
 
 var load_event_item = function (id) {
