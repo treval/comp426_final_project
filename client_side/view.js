@@ -1,3 +1,4 @@
+//Make sure to change this to your folder (not treval), and upload all of the server side files with scp.
 var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/treval/final_project/server_side";
 
 $(document).ready(function () {
