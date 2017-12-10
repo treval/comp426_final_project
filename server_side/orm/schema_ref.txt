@@ -13,6 +13,5 @@ User:
 
 Rsvp:
 	id: INT, primary key
-	guests: INT, number of guests signed up by user
 	uid: INT, id of user signing up, FOREIGN KEY references User
 	eid: INT, id of event signed up for, FOREIGN KEY references Event

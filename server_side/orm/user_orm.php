@@ -110,7 +110,7 @@ class User {
 			"'" . $mysqli->real_escape_string($this->last) . "', " .
 			"email=" .
 			"'" . $mysqli->real_escape_string($this->email) . "'" .
-			"where id=" . $this->id);
+			" where id=" . $this->id);
 		return $result;
 	}
 

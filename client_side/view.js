@@ -84,6 +84,18 @@ var Event = function(event_json) {
   this.description = event_json.description
 };
 
+var User = function(user_json) {
+  this.id = user_json.id;
+  this.first = user_json.first;
+  this.last = user_json.last;
+  this.email = user_json.email;
+};
+
+var Rsvp = function(rsvp_json) {
+  this.id = rsvp_json.id;
+  this.uid = rsvp_json.uid;
+  this.eid = rsvp_json.eid;
+}
 Event.prototype.makeCollapseEvent = function() {
 
   var event_div = $("<div class='event_div'></div>");
