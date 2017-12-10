@@ -105,7 +105,7 @@
 
 <ul>
 <div id="event_set_div">
-            <form action = "event_form()" id="new_event_form">
+            <form onsubmit = "return false;" id="new_event_form">
 			Create Event <br><br>
 			  Time: <br>
               <input name='time' type=text><br>
@@ -115,14 +115,14 @@
 			  <input name='location' type=text><br>
 			  Description: <br>
               <input name='description' type=text><br><br>
-              <button type=submit>Create Event</button>
+              <button type=submit onclick = "event_form()">Create Event</button>
           </form>
         </div>
 </ul>
 
 <script>
 
-	"https://wwwp.cs.unc.edu/Courses/comp426-f17/users/lyqe/final_project/server_side";
+	var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/lyqe/final_project/server_side";
 
 	var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	var today = new Date();
@@ -130,20 +130,21 @@
 	events = []; //events in an mmdd format
 	month_days();
 	
-	var selected_date = "";
+	var selected_date;
 	
 	function event_form()
 	{	
-		var serialized = {
+		var json = {
 			"name":event_set_div.name,
-			"date":selected_date,
+			"date":this.selected_date,
 			"time":event_set_div.time,
 			"desc":event_set_div.description
 		}
+		console.log($(json).serialize());
+		var serialized = $(json).serialize();
+	
 		
-		$(serialized).serialize;
-	
-	
+		
 		$.ajax(url_base + "/event.php",
 		{
 			type: "POST",
@@ -154,7 +155,7 @@
 				var e = new User(serialized);
 				$('.'+ selected_date + "li").append(e.makeCollapseEvent());
 			}
-		});
+		});	
 	}
 	
 	function next_month()
@@ -175,7 +176,7 @@
 	}
 	function create_event(button_id)
 	{
-		 selected_date = button_id;
+		 selected_date = button_id.toString();
 		
 	}
 	function month_days(){
