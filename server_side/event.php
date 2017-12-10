@@ -73,13 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     $new_scheduled = false;
-    $new_date_obj = null;
     if (isset($_REQUEST['scheduled'])) {
-      $new_scheduled = true;
-      $date_str = trim($_REQUEST['date']);
-      if ($date_str != "") {
-        $new_date_obj = new DateTime($date_str);
-      }
+      $new_scheduled = trim($_REQUEST['scheduled']);
     }
 
     $new_type = false;
@@ -97,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
       $event->setName($new_name);
     }
     if ($new_scheduled != false) {
-      $event->setScheduled($new_date_obj);
+      $event->setScheduled($new_scheduled);
     }
     if ($new_type) {
       $event->setType($new_type);
@@ -121,12 +116,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
       $name = trim($_REQUEST['name']);
     }
 
-    $scheduled = null;
+
+    $scheduled = "";
     if (isset($_REQUEST['scheduled'])) {
-      $date_str = trim($_REQUEST['scheduled']);
-      if ($date_str != "") {
-        $date = new DateTime($date_str);
-      }
+      $scheduled = trim($_REQUEST['scheduled']);
     }
 
     $type = "";

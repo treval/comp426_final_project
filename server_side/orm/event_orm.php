@@ -1,8 +1,7 @@
 <?php
 date_default_timezone_set('America/New_York');
 
-class Event
-{
+class Event {
   private $id;
   private $name;
   private $scheduled;
@@ -19,11 +18,9 @@ class Event
   public static function create($name, $scheduled, $type, $description) {
     $mysqli = Event::connect();
 
-    $dstr = "'" . $scheduled->format('Y-m-d H:i:s') . "'";
-
     $result = $mysqli->query("INSERT INTO Event VALUES (0, " .
      "'" . $mysqli->real_escape_string($name) . "', " .
-     $dstr . ", " .
+     "'" . $mysqli->real_escape_string($scheduled) . "', " .
      "'" . $mysqli->real_escape_string($type) . "', " .
      "'" . $mysqli->real_escape_string($description) . ")");
     
@@ -45,11 +42,9 @@ class Event
 
       $event_info = $result->fetch_array();
 
-      $scheduled = new DateTime($event_info['scheduled']);
-
       return new Event(intval($event_info['id']),
         $event_info['name'],
-        $scheduled,
+        $event_info['scheduled'],
         $event_info['type'],
         $event_info['description']);
     }
@@ -121,11 +116,9 @@ class Event
   private function update() {
     $mysqli = Event::connect();
 
-    $dstr = "'" . $this->scheduled->format('Y-m-d H:i:s') . "'";
-
     $result = $mysqli->query("UPDATE Event SET " .
      "name=" . "'" . $mysqli->real_escape_string($this->name) . "', " .
-     "scheduled=" . $dstr . ", " .
+     "scheduled=" . "'" . $mysqli->real_escape_string($this->scheduled) . "', " .
      "type=" . "'" . $mysqli->real_escape_string($this->type) . "', " .
      "description=" . "'" . $mysqli->real_escape_string($this->description) . "'" .
      " where id=" . $this->id);
@@ -139,11 +132,9 @@ class Event
 
   public function getJSON() {
 
-    $dstr = $this->scheduled->format('Y-m-d H:i:s');
-
     $json_obj = array('id' => $this->id,
       'name' => $this->name,
-      'scheduled' => $dstr,
+      'scheduled' => $this->scheduled,
       'type' => $this->type,
       'description' => $this->description);
     return json_encode($json_obj);
