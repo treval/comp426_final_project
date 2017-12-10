@@ -135,17 +135,17 @@
 	function event_form()
 	{
 		var json = 
-		'{
+		{
 			"name":event_set_div.name,
 			"date":selected_date,
 			"time":event_set_div.time,
 			"desc":event_set_div.description
-		}'
+		}
 	
 	
 		$.ajax(url_base + "/event.php/" + id,
 		{
-			type: "GET",
+			type: "POST",
 			dataType: "json",
 			success: function(json, status, jqXHR) 
 			{
