@@ -143,13 +143,14 @@
 		}
 	
 	
-		$.ajax(url_base + "/event.php/" + id,
+		$.ajax(url_base + "/event.php",
 		{
 			type: "POST",
 			dataType: "json",
+			data: json,
 			success: function(json, status, jqXHR) 
 			{
-				var e = new Event(json);
+				var e = new User(json);
 				$('.'+ selected_date + "li").append(e.makeCollapseEvent());
 			}
 		});
