@@ -3,8 +3,22 @@ var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/treval/final_p
 
 $(document).ready(function () {
 
+  /*
+  This is where you'll put all the client side functionality. You'll need more than the ajax requests I put here, but these are samples.
+  So just follow the examples to get data from the server. 
+
+  Let me know if: 
+    1. You have questions about the orms or RESTful interface
+      (Should be mainly RESTful interface, the ORM's are pretty much under the covers)
+    2. You ever get any 500 error in your web inspector. Those are probably on me, and I'll try to fix them or tell you what's going on
+       ASAP.
+  */
+
+  //Displays all events currently in database.
   renderEvents();
 
+  //This appends all events in the database to the event div. It's called on document.ready to have them there to start,
+  //but it's also called whenever a new event is submitted.
   function renderEvents() {
     $.ajax(url_base + "/event.php",
      {type: "GET",
@@ -18,6 +32,9 @@ $(document).ready(function () {
     });
   }
 
+  //These next two blocks submit a user or new event, respectively. Each are very similar. They are ajax POSTS using their 
+  //respective php file. They serialize the data from the form. On success, they create a usable js object bases on the actual
+  //model data. The difference is that a new event submission also runs renderEvents().
   $('#new_user_form').on('submit',
     function (e) {
       e.preventDefault();
@@ -41,13 +58,15 @@ $(document).ready(function () {
         dataType: "json",
         data: $(this).serialize(),
         success: function(event_json, status, jqXHR) {
-          renderEvents();
+          e = new Event(event_json);
+          renderEvents()
         },
         error: function(jqXHR, status, error) {
           alert(jqXHR.responseText);
         }});
   });
 
+  //Just for menu and styling stuff.
   var trigger = $('.hamburger'),
   overlay = $('.overlay'),
   isClosed = false;
@@ -76,6 +95,8 @@ $(document).ready(function () {
 
 });
 
+
+// Constructors for each event. Run on successful ajax requests.
 var Event = function(event_json) {
   this.id = event_json.id;
   this.name = event_json.name;
@@ -96,6 +117,9 @@ var Rsvp = function(rsvp_json) {
   this.uid = rsvp_json.uid;
   this.eid = rsvp_json.eid;
 }
+
+//Makes the div that contains event info. Might need modification for display, style, etc. You can write
+//something similar if you need to display users, rsvps, etc. 
 Event.prototype.makeCollapseEvent = function() {
 
   var event_div = $("<div class='event_div'></div>");
@@ -112,6 +136,8 @@ Event.prototype.makeCollapseEvent = function() {
 
 };
 
+//This loads a single item by id (/event.php/ + id) with a GET. On success, it creates an Event object e and appends the event
+//representation using makeCollapseEvent(); This is called within renderEvents().
 var load_event_item = function (id) {
   $.ajax(url_base + "/event.php/" + id,
     {type: "GET",
