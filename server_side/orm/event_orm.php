@@ -19,11 +19,11 @@ class Event {
     $mysqli = Event::connect();
 
     $result = $mysqli->query("INSERT INTO Event VALUES (0, " .
-     "'" . $mysqli->real_escape_string($name) . "', " .
-     "'" . $mysqli->real_escape_string($scheduled) . "', " .
-     "'" . $mysqli->real_escape_string($type) . "', " .
-     "'" . $mysqli->real_escape_string($description) . ")");
-    
+      "'" . $name . "', " .
+      "'" . $scheduled . "', " .
+      "'" . $type . "', " .
+      "'" . $description . "'" . ")");
+  
     if ($result) {
       $id = $mysqli->insert_id;
       return new Event($id, $name, $scheduled, $type, $description);
