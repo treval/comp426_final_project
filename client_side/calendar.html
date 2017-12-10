@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Current Events</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<style>
+	* {box-sizing: border-box;}
+	ul {list-style-type: none;}
+	body {font-family: Verdana, sans-serif;}
+	.month {
+    	padding: 70px 25px;
+    	width: 100%;
+    	background: #1abc9c;
+    	text-align: center;
+			}
+	.month ul {
+    	margin: 0;
+    	padding: 0;
+			}
+	.month ul li {
+    	color: white;
+    	font-size: 20px;
+    	text-transform: uppercase;
+    	letter-spacing: 3px;
+			}
+	.month .prev {
+    	float: left;
+    	padding-top: 10px;
+			}
+	.month .next {
+    	float: right;
+    	padding-top: 10px;
+			}
+	.weekdays {
+    	margin: 0;
+    	padding: 10px 0;
+    	background-color: #ddd;
+			}
+	.weekdays li {
+    	display: inline-block;
+    	width: 13.6%;
+    	color: #666;
+    	text-align: center;
+			}
+	.days {
+    	padding: 10px 0;
+    	background: #eee;
+    	margin: 0;
+			}
+	.days li {
+    	list-style-type: none;
+    	display: inline-block;
+    	width: 13.6%;
+    	text-align: center;
+    	margin-bottom: 5px;
+    	font-size:12px;
+    	color: #777;
+			}
+			/* Add media queries for smaller screens */
+	@media screen and (max-width:720px) {
+    	.weekdays li, .days li {width: 13.1%;}
+			}
+	@media screen and (max-width: 420px) {
+    	.weekdays li, .days li {width: 12.5%;}
+    	.days li .active {padding: 2px;}
+			}
+	@media screen and (max-width: 290px) {
+    	.weekdays li, .days li {width: 12.2%;}
+			}
+</style>
+</head>
+<body>
+
+<h1>Current Events</h1>
+
+<div class="month">
+  <ul>
+    <li class="prev"><button onclick="prev_month()">&#10094;</button></li>
+    <li class="next"><button onclick="next_month()">&#10095;</button></li>
+    <li id = "current_month">
+      <span style="font-size:18px">2017</span>
+    </li>
+  </ul>
+</div>
+
+<ul class="weekdays">
+  <li>Mo</li>
+  <li>Tu</li>
+  <li>We</li>
+  <li>Th</li>
+  <li>Fr</li>
+  <li>Sa</li>
+  <li>Su</li>
+</ul>
+
+<ul class="days" id = "for_month">
+</ul>
+
+<ul>
+<div id="event_set_div">
+            <form onsubmit = "return false;" id="new_event_form">
+			Create Event <br><br>
+			  Time: <br>
+              <input name='time' type=text><br>
+			  Event Name: <br>
+              <input name='name' type=text><br>
+			  Location: <br>
+			  <input name='location' type=text><br>
+			  Description: <br>
+              <input name='description' type=text><br><br>
+              <button type=submit onclick = "event_form()">Create Event</button>
+          </form>
+        </div>
+</ul>
+
+<script>
+
+	var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/lyqe/final_project/server_side";
+
+	var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	var today = new Date();
+	month = today.getMonth();
+	events = []; //events in an mmdd format
+	month_days();
+	
+	var selected_date;
+	
+	function event_form()
+	{	
+		var json = {
+			"name":event_set_div.name,
+			"date":this.selected_date,
+			"time":event_set_div.time,
+			"desc":event_set_div.description
+		}
+		console.log($(json).serialize());
+		var serialized = $(json).serialize();
+	
+		
+		
+		$.ajax(url_base + "/event.php",
+		{
+			type: "POST",
+			dataType: "json",
+			data: serialized,
+			success: function(serialized, status, jqXHR) 
+			{
+				var e = new User(serialized);
+				$('.'+ selected_date + "li").append(e.makeCollapseEvent());
+			}
+		});	
+	}
+	
+	function next_month()
+	{
+			if (month < 11)
+			{
+				month = month + 1;
+				month_days();
+			}
+	}
+	function prev_month()
+	{
+		if(month > 0)
+		{
+			month = month - 1;
+			month_days();
+		}
+	}
+	function create_event(button_id)
+	{
+		 selected_date = button_id.toString();
+		
+	}
+	function month_days(){
+		if (month == 1 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11)
+		{month_length = 31;}
+		else if (month == 3 || month == 5 || month == 8 || month == 10)
+		{month_length = 30;}
+		else if (month == 1)
+		{month_length = 29;}
+		var list = document.getElementById("for_month");
+		list.innerHTML = "";
+		for(var i = 0; i <= month_length; i++)
+		{
+			var item = document.createElement('li');
+			var button = document.createElement("button");
+			button.innerHTML = i;
+			var str_i = "";
+			var str_m = "";
+			if(i < 10) {str_i = "0" + i}
+			else {str_i = "" + i;}
+			if(month < 10) {str_m = "0" + month}
+			else {str_m = "" + month;}
+			button.id = str_m + str_i;
+			item.id = str_m + str_i + "li";
+			button.onclick = function(){create_event(this.id)};
+			item.appendChild(button);
+			list.appendChild(item);
+		}
+		var list2 = document.getElementById("current_month");
+		list2.innerHTML = "";
+		var item2 = document.createElement('li');
+		item2.appendChild(document.createTextNode(monthNames[month]));
+		list2.appendChild(item2);
+	}
+</script>
+
+</body>
+
+</html>
