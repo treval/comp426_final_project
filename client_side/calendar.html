@@ -105,7 +105,7 @@
 
 <ul>
 <div id="event_set_div">
-            <form action = "create_event()" id="new_event_form">
+            <form action = "event_form()" id="new_event_form">
 			Create Event <br><br>
 			  Time: <br>
               <input name='time' type=text><br>
@@ -132,7 +132,7 @@
 	
 	var selected_date = "";
 	
-	function create_event()
+	function event_form()
 	{
 		var json = 
 		'{
