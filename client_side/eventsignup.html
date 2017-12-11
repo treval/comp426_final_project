@@ -65,34 +65,73 @@
     </button>
 
     <div class="content">
-        <div class="container event_list">
+
+    <div class="container event_list">
 
         </div>
-
-        <div id="new_user_div">
-            <p>User Post Form Example</p>
-            <form id="new_user_form">
-              <input name='first' type=text><br>
-              <input name='last' type=text><br>
-              <input name='email' type=text><br>
-              <button type=submit>Submit</button>
-          </form>
+    
+    <div class="new_user_div">
+        <div class="title">
+            <h1>Sign Up!</h1>
         </div>
+        <p>Please fill out the form below to be added to the event</p>
+        <div class="fields">
+            <form id="new_user_form" onsubmit="alert('Thank you! You have been added to the event. Mark your calendar!');">
+                <label for="first">First Name: </label>
+                <input id="first" type="text"><br>
 
-        <div id="new_event_div">
-            <p>Event Post Form Example</p>
-            <form id="new_event_form">
-              <input name='name' type=text><br>
-              <input name='scheduled' type=text><br>
-              <input name='type' type=text><br>
-              <input name='description' type=text><br>
-              <button type=submit>Submit</button>
-          </form>
+                <label for="last">Last Name: </label>
+                <input id="last" type="text"><br>
+
+                <label for="email">Email: </label>
+                <input id="email" type="text"><br>kklhjhkjhlh
+
+                <button type="submit">Submit</button>
+            </form>
         </div>
-
     </div>
+    <div class="new_event_div">
+        <div class="title">
+            <h1>Create Event</h1>
+        </div>
+        <p>Please fill out the form below to create a new event</p>
+        <div class="fields">
+            <form id="new_event_form" onsubmit="alert('Thank you! A new event has been created');">
+                <label for="name">Event Name: </label>
+                <input id="name" type="text"><br>
+
+                <label for="scheduled">Date of Event (MM/DD/YYYY): </label>
+                <input id="scheduled" type="text"><br>
+
+                <label>Type:
+                    <select class="experience">
+                        <option value= "Hiking">Hiking</option>
+                        <option value= "Canoeing">Canoeing</option>
+                        <option value="Swimming">Swimming</option>
+                        <option value="Camping">Camping</option>
+                        <option value="Food">Food</option>
+                    </select>
+                </label><br>
+
+                <label for="description">Description: </label>
+                <input id="description" type="text"><br>
+
+                <button type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 </body>
 
 </html>
-
+<style>
+    div.new_user_div{
+        float: left;
+    }
+    div.new_event_div{
+        overflow: hidden;
+        text-align: right;
+    }
+</style>
