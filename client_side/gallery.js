@@ -73,4 +73,30 @@ $(document).ready(function(){
 	$("#item21").click(function(){
 		$("#mainCarousel").carousel(20);
 	});
+	$("#item22").click(function(){
+		$("#mainCarousel").carousel(21);
+	});
+	$("#item23").click(function(){
+		$("#mainCarousel").carousel(22);
+	});
+	$("#item24").click(function(){
+		$("#mainCarousel").carousel(23);
+	});
+	$("#item25").click(function(){
+		$("#mainCarousel").carousel(24);
+	});
+	$("#item26").click(function(){
+		$("#mainCarousel").carousel(25);
+	});
+	$("#item27").click(function(){
+		$("#mainCarousel").carousel(26);
+	});
+	$("#item28").click(function(){
+		$("#mainCarousel").carousel(27);
+	});
+	$("#item29").click(function(){
+		$("#mainCarousel").carousel(28);
+	});
+
+
 });
