@@ -144,3 +144,46 @@ body {
 .event_list {
   border: thin solid black;
 }
+
+#thumbHolder{
+	overflow: auto;
+}
+
+.thumbList{
+	list-style: none;
+	margin-left: -40px;
+    overflow-y: scroll;
+	height: 225px;
+}
+
+.thumbnail{
+	padding: 0;
+}	
+
+.top-buffer{
+	padding: 35px;
+}
+
+.lazyThumbs{
+	display:none;
+}
+
+#gallery_header {
+  margin-left: 280px;
+}
+
+#home_header {
+  margin-left: 170px;
+}
+
+.iframe_div {
+  margin-left: 40px;
+}
+
+#video_frame {
+  margin-top: 200px;
+}
+
+.map_header {
+  margin-left: 230px;
+}

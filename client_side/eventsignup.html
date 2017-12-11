@@ -34,7 +34,7 @@
             </li>
             <li>
                 <a href="parcel.html">
-                    Maps and Parcel Diagram
+                    Parcel Diagram
                 </a>
             </li>
             <li class="dropdown">
@@ -43,20 +43,10 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="eventsignup.html">Administrator</a></li>
+                    <li><a href="calendar.html">Administrator</a></li>
                     <li><a href="eventsignup.html">Sign-Up!</a></li>
                 </ul>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    Forum
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="forum.html">Administrator</a></li>
-                    <li><a href="forum.html">Sign-Up!</a></li>
-                </ul>  
-            </li>   
+            </li>  
         </ul>
     </nav>
 
@@ -76,7 +66,7 @@
         </div>
         <p>Please fill out the form below to be added to the event</p>
         <div class="fields">
-            <form id="new_user_form" onsubmit="alert('Thank you! You have been added to the event. Mark your calendar!');">
+            <form id="new_user_form" action = "user.php" onsubmit="alert('Thank you! You have been added to the event. Mark your calendar!');">
                 <label for="first">First Name: </label>
                 <input id="first" type="text"><br>
 
@@ -84,42 +74,13 @@
                 <input id="last" type="text"><br>
 
                 <label for="email">Email: </label>
-                <input id="email" type="text"><br>kklhjhkjhlh
+                <input id="email" type="text"><br>
 
                 <button type="submit">Submit</button>
             </form>
         </div>
     </div>
-    <div class="new_event_div">
-        <div class="title">
-            <h1>Create Event</h1>
-        </div>
-        <p>Please fill out the form below to create a new event</p>
-        <div class="fields">
-            <form id="new_event_form" onsubmit="alert('Thank you! A new event has been created');">
-                <label for="name">Event Name: </label>
-                <input id="name" type="text"><br>
 
-                <label for="scheduled">Date of Event (MM/DD/YYYY): </label>
-                <input id="scheduled" type="text"><br>
-
-                <label>Type:
-                    <select class="experience">
-                        <option value= "Hiking">Hiking</option>
-                        <option value= "Canoeing">Canoeing</option>
-                        <option value="Swimming">Swimming</option>
-                        <option value="Camping">Camping</option>
-                        <option value="Food">Food</option>
-                    </select>
-                </label><br>
-
-                <label for="description">Description: </label>
-                <input id="description" type="text"><br>
-
-                <button type="submit">Create</button>
-            </form>
-        </div>
-    </div>
 </div>
 
 
@@ -128,10 +89,7 @@
 </html>
 <style>
     div.new_user_div{
-        float: left;
+        text-align: center;
     }
-    div.new_event_div{
-        overflow: hidden;
-        text-align: right;
-    }
+   
 </style>
