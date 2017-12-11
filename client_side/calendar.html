@@ -15,8 +15,8 @@
 	ul {list-style-type: none;}
 	body {font-family: Verdana, sans-serif;}
 	.month {
+		width: 100%;
     	padding: 70px 25px;
-    	width: 100%;
     	background: #1abc9c;
     	text-align: center;
 			}
@@ -76,8 +76,9 @@
 			}
 </style>
 </head>
-<body>
+<body>	
 
+<div class="content">
 <h1>Current Events</h1>
 
 <div class="month">
@@ -107,14 +108,14 @@
 <div id="event_set_div">
             <form onsubmit = "return false;" id="new_event_form">
 			Create Event <br><br>
+			  Name: <br>
+              <input name='name' id= 'name' type=text><br>
 			  Time: <br>
-              <input name='time' type=text><br>
-			  Event Name: <br>
-              <input name='name' type=text><br>
-			  Location: <br>
-			  <input name='location' type=text><br>
+              <input name='time' id = 'time' type=text><br>
+			  Type: <br>
+			  <input name='type' id = 'type' type=text><br>
 			  Description: <br>
-              <input name='description' type=text><br><br>
+              <input name='desc' id = 'desc' type=text><br><br>
               <button type=submit onclick = "event_form()">Create Event</button>
           </form>
         </div>
@@ -122,12 +123,12 @@
 
 <script>
 
-	var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/lyqe/final_project/server_side";
+	//var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/lyqe/final_project/server_side";
 
 	var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	var today = new Date();
 	month = today.getMonth();
-	events = []; //events in an mmdd format
+	events = []; //events in an mm-dd format
 	month_days();
 	
 	var selected_date;
@@ -135,12 +136,13 @@
 	function event_form()
 	{	
 		var json = {
-			"name":event_set_div.name,
-			"date":this.selected_date,
-			"time":event_set_div.time,
-			"desc":event_set_div.description
+			"name":document.getElementById('name').value,
+			"scheduled":this.selected_date + document.getElementById('time').value,
+			"type":document.getElementById('type').value,
+			"description":document.getElementById('desc').value
 		}
-		console.log($(json).serialize());
+		//console.log(json);
+		
 		var serialized = $(json).serialize();
 	
 		
@@ -199,7 +201,7 @@
 			else {str_i = "" + i;}
 			if(month < 10) {str_m = "0" + month}
 			else {str_m = "" + month;}
-			button.id = str_m + str_i;
+			button.id = str_m + "-" + str_i;
 			item.id = str_m + str_i + "li";
 			button.onclick = function(){create_event(this.id)};
 			item.appendChild(button);
@@ -212,7 +214,7 @@
 		list2.appendChild(item2);
 	}
 </script>
-
+</div>
 </body>
 
 </html>
