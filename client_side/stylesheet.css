@@ -208,4 +208,26 @@ iframe {
 .lazyThumbs{
 	display:none;
 }
+
+.nav_toggle{
+
+  background-color: rgba(222, 219, 223, 0.75);
+  display: inline-block;
+  border-radius : 4px;
+  box-shadow : inset 0 1px 0 rgba(255,255,255,0.2);
+  font-family: Arial, sans-serif;
+  line-height: 2.5em;
+  padding: 0 3em;
+  text-decoration: none;
+
+}
+.nav_toggle:hover {
+box-shadow: inset 0 1px 1px rgba(255,255,255,0.2),
+inset 0 1.5em 1em rgba(255,255,255,0.3);
+}
+
+.nav_toggle:active {
+box-shadow: inset 0 1px 1px rgba(255,255,255,0.2),
+inset 0 1.5em 1em rgba(0,0,0,0.3);
+}
 >>>>>>> master
