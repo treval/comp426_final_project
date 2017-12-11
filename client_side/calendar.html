@@ -15,8 +15,8 @@
 	ul {list-style-type: none;}
 	body {font-family: Verdana, sans-serif;}
 	.month {
-		width: 100%;
     	padding: 70px 25px;
+    	width: 100%;
     	background: #1abc9c;
     	text-align: center;
 			}
@@ -76,9 +76,10 @@
 			}
 </style>
 </head>
-<body>	
+<body>
 
 <div class="content">
+
 <h1>Current Events</h1>
 
 <div class="month">
@@ -108,14 +109,14 @@
 <div id="event_set_div">
             <form onsubmit = "return false;" id="new_event_form">
 			Create Event <br><br>
-			  Name: <br>
-              <input name='name' id= 'name' type=text><br>
 			  Time: <br>
-              <input name='time' id = 'time' type=text><br>
+              <input name='time' type=time id = 'theTime'><br>
+			  Event Name: <br>
+              <input name='name' type=text id = 'name'><br>
 			  Type: <br>
-			  <input name='type' id = 'type' type=text><br>
+			  <input name='type' type=text id = 'type'><br>
 			  Description: <br>
-              <input name='desc' id = 'desc' type=text><br><br>
+              <input name='description' type=text id = 'desc'><br><br>
               <button type=submit onclick = "event_form()">Create Event</button>
           </form>
         </div>
@@ -123,41 +124,37 @@
 
 <script>
 
-	//var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/lyqe/final_project/server_side";
+	var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/lyqe/final_project/server_side";
 
 	var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	var today = new Date();
 	month = today.getMonth();
-	events = []; //events in an mm-dd format
+	events = []; //events in an mmdd format
 	month_days();
 	
 	var selected_date;
 	
-	function event_form()
+	function event_form() // pass name, type, date, desc
 	{	
-		var json = {
-			"name":document.getElementById('name').value,
-			"scheduled":this.selected_date + document.getElementById('time').value,
-			"type":document.getElementById('type').value,
-			"description":document.getElementById('desc').value
-		}
-		//console.log(json);
-		
-		var serialized = $(json).serialize();
-	
-		
-		
 		$.ajax(url_base + "/event.php",
 		{
 			type: "POST",
 			dataType: "json",
-			data: serialized,
+			name: document.getElementById("name").value.toString(),
+			date: this.selected_date.toString() + document.getElementById("theTime").value.toString() + ":00",
+			type: document.getElementById("type").value.toString(),
+			desc: document.getElementById("desc").value.toString(),
 			success: function(serialized, status, jqXHR) 
 			{
 				var e = new User(serialized);
-				$('.'+ selected_date + "li").append(e.makeCollapseEvent());
-			}
+				$('.'+ selected_date.toString() + "li").append(e.makeCollapseEvent());
+			},
+			error: function(exception){alert('Exception:'+exception);}
 		});	
+			//console.log(document.getElementById("name").value.toString());
+			//console.log(this.selected_date.toString() + "-17" + " " + document.getElementById("theTime").value.toString() + ":00");
+			//console.log(document.getElementById("type").value.toString());
+			//console.log(document.getElementById("desc").value.toString());
 	}
 	
 	function next_month()
@@ -214,7 +211,9 @@
 		list2.appendChild(item2);
 	}
 </script>
+
 </div>
+
 </body>
 
 </html>
