@@ -17,22 +17,19 @@
 	.month {
     	padding: 70px 25px;
     	width: 100%;
-    	background: #1abc9c;
     	text-align: center;
+		font-size: 35px;
+		color: #800000;
+		font-family: "Palanquin", Times, serif;
 			}
 	.month ul {
     	margin: 0;
     	padding: 0;
 			}
-	.month ul li {
-    	color: white;
-    	font-size: 20px;
-    	text-transform: uppercase;
-    	letter-spacing: 3px;
-			}
 	.month .prev {
     	float: left;
     	padding-top: 10px;
+		border: none;
 			}
 	.month .next {
     	float: right;
@@ -87,7 +84,6 @@
     <li class="prev"><button onclick="prev_month()">&#10094;</button></li>
     <li class="next"><button onclick="next_month()">&#10095;</button></li>
     <li id = "current_month">
-      <span style="font-size:18px">2017</span>
     </li>
   </ul>
 </div>
@@ -124,7 +120,44 @@
 
 <script>
 
-	var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/lyqe/final_project/server_side";
+	var Event = function(event_json) {
+		this.id = event_json.id;
+		this.name = event_json.name;
+		this.scheduled = event_json.scheduled;
+		this.type = event_json.type;
+		this.description = event_json.description
+	};
+
+	var User = function(user_json) {
+		this.id = user_json.id;
+		this.first = user_json.first;
+		this.last = user_json.last;
+		this.email = user_json.email;
+	};
+
+	var Rsvp = function(rsvp_json) {
+		this.id = rsvp_json.id;
+		this.uid = rsvp_json.uid;
+		this.eid = rsvp_json.eid;
+	}
+	
+	Event.prototype.makeCollapseEvent = function() {
+
+	var event_div = $("<div class='event_div'></div>");
+
+	var title_div = $("<div></div>");
+	title_div.addClass('title');
+	title_div.html(this.name+" "+this.scheduled + " <span class='caret'></span>");
+
+	event_div.append(title_div);
+	event_div.append("<div id='new_user_div'><form id='new_user_form'><input name='first' type=text><br><input name='last' type=text><br><input name='email' type=text><br><button type=submit>Create</button></form></div>");
+
+	event_div.data('event', this);
+	return event_div;
+
+	};
+
+	var url_base = "https://wwwp.cs.unc.edu/Courses/comp426-f17/users/treval/final_project/server_side";
 
 	var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	var today = new Date();
@@ -136,25 +169,27 @@
 	
 	function event_form() // pass name, type, date, desc
 	{	
+	
+			var serialized = "name=" + document.getElementById("name").value.toString() + "&" +
+			"scheduled=" + this.selected_date.toString() + " " + document.getElementById("theTime").value.toString() + ":00" + "&" +
+			"type=" + document.getElementById("type").value.toString() + "&" +
+			"description=" + document.getElementById("desc").value.toString();
+			
+			
 		$.ajax(url_base + "/event.php",
 		{
 			type: "POST",
 			dataType: "json",
-			name: document.getElementById("name").value.toString(),
-			date: this.selected_date.toString() + document.getElementById("theTime").value.toString() + ":00",
-			type: document.getElementById("type").value.toString(),
-			desc: document.getElementById("desc").value.toString(),
+			data: serialized,
+
 			success: function(serialized, status, jqXHR) 
 			{
-				var e = new User(serialized);
+				var e = new Event(serialized);
 				$('.'+ selected_date.toString() + "li").append(e.makeCollapseEvent());
 			},
 			error: function(exception){alert('Exception:'+exception);}
 		});	
-			//console.log(document.getElementById("name").value.toString());
-			//console.log(this.selected_date.toString() + "-17" + " " + document.getElementById("theTime").value.toString() + ":00");
-			//console.log(document.getElementById("type").value.toString());
-			//console.log(document.getElementById("desc").value.toString());
+			console.log(serialized);
 	}
 	
 	function next_month()
