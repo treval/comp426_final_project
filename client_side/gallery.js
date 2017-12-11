@@ -73,5 +73,4 @@ $(document).ready(function(){
 	$("#item21").click(function(){
 		$("#mainCarousel").carousel(20);
 	});
-	
 });

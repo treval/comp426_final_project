@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="view.js"></script>
 
 	<style>
 	* {box-sizing: border-box;}
@@ -77,6 +78,47 @@
 </style>
 </head>
 <body>
+<div id="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li>
+                <a href="home.html">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="gallery.html">
+                    Photo Gallery
+                </a>
+            </li>
+            <li>
+                <a href="video.html">
+                    Videos
+                </a>
+            </li>
+            <li>
+                <a href="parcel.html">
+                    Parcel Diagram
+                </a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    Event Sign-Up
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="calendar.html">Administrator</a></li>
+                    <li><a href="eventsignup.html">Sign-Up!</a></li>
+                </ul>
+            </li>
+             
+        </ul>
+    </nav>
+
+    <button type="button" class="nav_toggle" data-toggle="offcanvas">
+        <span>Menu</span>
+    </button>
+<div class="content">
 
 <h1>Current Events</h1>
 
@@ -108,13 +150,13 @@
             <form onsubmit = "return false;" id="new_event_form">
 			Create Event <br><br>
 			  Time: <br>
-              <input name='time' type=text><br>
+              <input name='time' type=time id = 'theTime'><br>
 			  Event Name: <br>
-              <input name='name' type=text><br>
-			  Location: <br>
-			  <input name='location' type=text><br>
+              <input name='name' type=text id = 'name'><br>
+			  Type: <br>
+			  <input name='type' type=text id = 'type'><br>
 			  Description: <br>
-              <input name='description' type=text><br><br>
+              <input name='description' type=text id = 'desc'><br><br>
               <button type=submit onclick = "event_form()">Create Event</button>
           </form>
         </div>
@@ -132,30 +174,27 @@
 	
 	var selected_date;
 	
-	function event_form()
+	function event_form() // pass name, type, date, desc
 	{	
-		var json = {
-			"name":event_set_div.name,
-			"date":this.selected_date,
-			"time":event_set_div.time,
-			"desc":event_set_div.description
-		}
-		console.log($(json).serialize());
-		var serialized = $(json).serialize();
-	
-		
-		
 		$.ajax(url_base + "/event.php",
 		{
 			type: "POST",
 			dataType: "json",
-			data: serialized,
+			name: document.getElementById("name").value.toString(),
+			date: this.selected_date.toString() + document.getElementById("theTime").value.toString() + ":00",
+			type: document.getElementById("type").value.toString(),
+			desc: document.getElementById("desc").value.toString(),
 			success: function(serialized, status, jqXHR) 
 			{
 				var e = new User(serialized);
-				$('.'+ selected_date + "li").append(e.makeCollapseEvent());
-			}
+				$('.'+ selected_date.toString() + "li").append(e.makeCollapseEvent());
+			},
+			error: function(exception){alert('Exception:'+exception);}
 		});	
+			//console.log(document.getElementById("name").value.toString());
+			//console.log(this.selected_date.toString() + "-17" + " " + document.getElementById("theTime").value.toString() + ":00");
+			//console.log(document.getElementById("type").value.toString());
+			//console.log(document.getElementById("desc").value.toString());
 	}
 	
 	function next_month()
@@ -199,7 +238,7 @@
 			else {str_i = "" + i;}
 			if(month < 10) {str_m = "0" + month}
 			else {str_m = "" + month;}
-			button.id = str_m + str_i;
+			button.id = str_m + "-" + str_i;
 			item.id = str_m + str_i + "li";
 			button.onclick = function(){create_event(this.id)};
 			item.appendChild(button);
@@ -212,6 +251,9 @@
 		list2.appendChild(item2);
 	}
 </script>
+
+</div>
+</div>
 
 </body>
 
