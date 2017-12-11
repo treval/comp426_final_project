@@ -10,194 +10,199 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="gallery.js"></script>
-    <script src="view.js"></script>
+	<script src="view.js"></script>
 </head>
 
 <body>     
 
-<div id="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-        <ul class="nav sidebar-nav">
-            <li>
-                <a href="home.html">
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="gallery.html">
-                    Photo Gallery
-                </a>
-            </li>
-            <li>
-                <a href="video.html">
-                    Videos
-                </a>
-            </li>
-            <li>
-                <a href="parcel.html">
-                    Maps and Parcel Diagram
-                </a>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    Event Sign-Up
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="eventsignup.html">Administrator</a></li>
-                    <li><a href="eventsignup.html">Sign-Up!</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+	<div id="wrapper">
+		<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+			<ul class="nav sidebar-nav">
+				<li>
+					<a href="home.html">
+						Home
+					</a>
+				</li>
+				<li>
+					<a href="gallery.html">
+						Photo Gallery
+					</a>
+				</li>
+				<li>
+					<a href="video.html">
+						Videos
+					</a>
+				</li>
+				<li>
+					<a href="parcel.html">
+						Maps and Parcel Diagram
+					</a>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">
+						Event Sign-Up
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="eventsignup.html">Administrator</a></li>
+						<li><a href="eventsignup.html">Sign-Up!</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
 
-    <button type="button" class="nav_toggle" data-toggle="offcanvas">
-        <span>menu</span>
-    </button>
+		<button type="button" class="nav_toggle" data-toggle="offcanvas">
+			<span>menu</span>
+		</button>
 
-	<div class="container">
-		<div class="row top-buffer">
-			<div id="slideShow" class="col-sm-8 no-float">
-				<div id="mainCarousel" class="carousel slide" data-ride="carousel">
-			
-				  <!--Slides -->
-				  <div class="carousel-inner">
-					<div class="item active">
-					  <img src="resources/Parcel Photos/DSC00245.jpg" alt="Image Not Available">
-					</div>
+		<div class="content">
+			<h1 id='gallery_header'>Photo Gallery</h1>
 
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00246.jpg" alt="Image Not Available">
-					</div>
+			<div class="container">
+				<div class="row top-buffer">
+					<div id="slideShow" class="col-sm-8 no-float">
+						<div id="mainCarousel" class="carousel slide" data-ride="carousel">
 
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00247.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00248.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00249.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00250.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00251.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00252.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00253.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00254.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00255.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00256.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00257.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00258.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00259.jpg" alt="Image Not Available">
-					</div>
-					
-					<div class="item lazyThumb">
-					  <img src="resources\Parcel Photos\DSC00260.jpg" alt="Image Not Available">
-					</div>
-					
-				  </div>
+							<!--Slides -->
+							<div class="carousel-inner">
+								<div class="item active">
+									<img src="resources/Parcel Photos/DSC00245.jpg" alt="Image Not Available">
+								</div>
 
-				  <!-- Left and right controls -->
-				  <a class="left carousel-control" href="#mainCarousel" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					<span class="sr-only">Previous</span>
-				  </a>
-				  <a class="right carousel-control" href="#mainCarousel" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-					<span class="sr-only">Next</span>
-				  </a>
-				  
-				  
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00246.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00247.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00248.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00249.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00250.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00251.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00252.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00253.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00254.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00255.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00256.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00257.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00258.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00259.jpg" alt="Image Not Available">
+								</div>
+
+								<div class="item lazyThumb">
+									<img src="resources\Parcel Photos\DSC00260.jpg" alt="Image Not Available">
+								</div>
+
+							</div>
+
+							<!-- Left and right controls -->
+							<a class="left carousel-control" href="#mainCarousel" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="right carousel-control" href="#mainCarousel" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+								<span class="sr-only">Next</span>
+							</a>
+
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div id="thumbHolder" class="col-sm-4 no-float">
+						<ul class="thumbList">
+							<li id="item1" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00245.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item2" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00246.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item3" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00247.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item4" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00248.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item5" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00249.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item6" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00250.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item7" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00251.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item8" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00252.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item9" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00253.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item10" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00254.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item11" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00255.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item12" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00256.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item13" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00257.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item14" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00258.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item15" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00259.jpg" alt="Image Not Available"> </a>
+							</li>
+							<li id="item16" class="col-sm-4">
+								<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00260.jpg" alt="Image Not Available"> </a>
+							</li>
+
+						</ul>	
+					</div>
 				</div>
 			</div>
-			<div id="thumbHolder" class="col-sm-4 no-float">
-				<ul class="thumbList">
-					<li id="item1" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00245.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item2" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00246.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item3" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00247.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item4" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00248.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item5" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00249.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item6" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00250.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item7" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00251.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item8" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00252.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item9" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00253.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item10" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00254.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item11" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00255.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item12" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00256.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item13" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00257.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item14" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00258.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item15" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00259.jpg" alt="Image Not Available"> </a>
-					</li>
-					<li id="item16" class="col-sm-4">
-						<a class="thumbnail"> <img src="resources/Parcel Photos/DSC00260.jpg" alt="Image Not Available"> </a>
-					</li>
-					
-				</ul>	
-			</div>
 		</div>
-	</div>
 
-</body>
+	</body>
 
-</html>
+	</html>
 
