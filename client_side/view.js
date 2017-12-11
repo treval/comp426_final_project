@@ -66,6 +66,21 @@ $(document).ready(function () {
         }});
   });
 
+  $('#new_rsvp_form').on('submit',
+    function (e) {
+      e.preventDefault();
+      $.ajax(url_base + "/rsvp.php",
+        {type: "POST",
+        dataType: "json",
+        data: $(this).serialize(),
+        success: function(rsvp_json, status, jqXHR) {
+          r = new Rsvp(rsvp_json);
+        },
+        error: function(jqXHR, status, error) {
+          alert(jqXHR.responseText);
+        }});
+  });
+
   //Just for menu and styling stuff.
   var trigger = $('.hamburger'),
   overlay = $('.overlay'),
@@ -92,7 +107,7 @@ $(document).ready(function () {
   $('[data-toggle="offcanvas"]').click(function () {
     $('#wrapper').toggleClass('toggled');
   });  
-
+  $().data()
 });
 
 

@@ -17,10 +17,8 @@ class Rsvp
   public static function create($uid, $eid) {
     $mysqli = Rsvp::connect();
 
-    $result = $mysqli->query("INSERT INTO Rsvp VALUES (0, " .
-      "'" . $uid . "', " .
-      "'" . $eid . ")");
-    
+    $result = $mysqli->query("INSERT INTO Rsvp VALUES (0, "."'".$uid."', "."'".$eid."');");
+
     if ($result) {
       $id = $mysqli->insert_id;
       return new Rsvp($id, $uid, $eid);

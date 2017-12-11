@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
   // GET means either instance look up, index generation, or deletion
 
   // Following matches instance URL in form
-  // /event_orm.php/<id>
+  // /event.php/<id>
 
   if ((count($path_components) >= 2) && ($path_components[1] != "")) {
 
