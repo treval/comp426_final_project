@@ -67,11 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     // Validate values
-    $new_guest = false;
-    if (isset($_REQUEST['guest'])) {
-      $new_guest = trim($_REQUEST['guest']);
-    }
-
     $new_uid = false;
     if (isset($_REQUEST['uid'])) {
       $new_uid = trim($_REQUEST['uid']);
@@ -83,9 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     // Update via ORM
-    if ($new_guest) {
-      $rsvp->setGuest($new_guest);
-    }
     if ($new_uid != false) {
       $rsvp->setUid($new_uid);
     }
@@ -103,11 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
     // Validate values
 
-    $guest = "";
-    if (isset($_REQUEST['guest'])) {
-      $guest = trim($_REQUEST['guest']);
-    }
-
     $uid = "";
     if (isset($_REQUEST['uid'])) {
       $uid = trim($_REQUEST['uid']);
@@ -119,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     // Create new Rsvp via ORM
-    $new_rsvp = Rsvp::create($guest, $uid, $eid);
+    $new_rsvp = Rsvp::create($uid, $eid);
 
     // Report if failed
     if ($new_rsvp == null) {
