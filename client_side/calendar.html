@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="view.js"></script>
 
 	<style>
 	* {box-sizing: border-box;}
@@ -74,7 +75,46 @@
 </style>
 </head>
 <body>
+<div id="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li>
+                <a href="home.html">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="gallery.html">
+                    Photo Gallery
+                </a>
+            </li>
+            <li>
+                <a href="video.html">
+                    Videos
+                </a>
+            </li>
+            <li>
+                <a href="parcel.html">
+                    Parcel Diagram
+                </a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    Event Sign-Up
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="calendar.html">Administrator</a></li>
+                    <li><a href="eventsignup.html">Sign-Up!</a></li>
+                </ul>
+            </li>
+             
+        </ul>
+    </nav>
 
+    <button type="button" class="nav_toggle" data-toggle="offcanvas">
+        <span>Menu</span>
+    </button>
 <div class="content">
 
 <h1>Current Events</h1>
@@ -247,6 +287,7 @@
 	}
 </script>
 
+</div>
 </div>
 
 </body>
