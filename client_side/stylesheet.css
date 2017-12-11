@@ -145,6 +145,7 @@ body {
   border: thin solid black;
 }
 
+<<<<<<< HEAD
 /* Gallery Styles */
 
 #thumbHolder{
@@ -184,3 +185,27 @@ iframe {
 #gallery_header {
   margin-left: 280px;
 }
+=======
+#thumbHolder{
+	overflow: auto;
+}
+
+.thumbList{
+	list-style: none;
+	margin-left: -40px;
+    overflow-y: scroll;
+	height: 225px;
+}
+
+.thumbnail{
+	padding: 0;
+}	
+
+.top-buffer{
+	padding: 35px;
+}
+
+.lazyThumbs{
+	display:none;
+}
+>>>>>>> master
