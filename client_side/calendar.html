@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="view.js"></script>
+	<!--<script src="view.js"></script>-->
 
 	<style>
 	* {box-sizing: border-box;}
@@ -29,12 +29,11 @@
 			}
 	.month .prev {
     	float: left;
-    	padding-top: 10px;
-		border: none;
+		cursor: pointer;
 			}
 	.month .next {
     	float: right;
-    	padding-top: 10px;
+		cursor: pointer;
 			}
 	.weekdays {
     	margin: 0;
@@ -52,7 +51,11 @@
     	background: #eee;
     	margin: 0;
 			}
+	.day {
+			cursor: pointer;
+			}
 	.days li {
+		cursor: pointer;
     	list-style-type: none;
     	display: inline-block;
     	width: 13.6%;
@@ -121,8 +124,8 @@
 
 <div class="month">
   <ul>
-    <li class="prev"><button onclick="prev_month()">&#10094;</button></li>
-    <li class="next"><button onclick="next_month()">&#10095;</button></li>
+    <li class="prev"><div onclick="prev_month()">&#10094;</div></li>
+    <li class="next"><div onclick="next_month()">&#10095;</div></li>
     <li id = "current_month">
     </li>
   </ul>
@@ -159,6 +162,10 @@
 </ul>
 
 <script>
+	var first_day;
+	var date = new Date();
+	var offset = date.getFullYear() - 2017;
+	console.log(offset.toString());
 
 	var Event = function(event_json) {
 		this.id = event_json.id;
@@ -239,6 +246,12 @@
 				month = month + 1;
 				month_days();
 			}
+			else
+			{
+				offset = offset+1;
+				month = 0;
+				month_days();
+			}
 	}
 	function prev_month()
 	{
@@ -247,6 +260,13 @@
 			month = month - 1;
 			month_days();
 		}
+		else if(offset > 0)
+		{
+			offset = offset-1;
+			month = 11;
+			month_days();
+		}
+		
 	}
 	function create_event(button_id)
 	{
@@ -254,18 +274,80 @@
 		
 	}
 	function month_days(){
-		if (month == 1 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11)
-		{month_length = 31;}
-		else if (month == 3 || month == 5 || month == 8 || month == 10)
-		{month_length = 30;}
+		if (month == 0)
+		{
+			first_day = (0 + offset)%7;
+			month_length = 31;
+		}
 		else if (month == 1)
-		{month_length = 29;}
+		{
+			first_day = (3 + offset)%7;
+			month_length = 28;
+		}		
+		else if (month == 2)
+		{
+			first_day = (3 + offset)%7;
+			month_length = 31;
+		}
+		else if (month == 3)
+		{
+			first_day = (6 + offset)%7;
+			month_length = 30;
+		}
+		else if (month == 4)
+		{
+			first_day = (1 + offset)%7;
+			month_length = 31;
+		}
+		else if (month == 5)
+		{
+			first_day = (4 + offset)%7;
+			month_length = 30;
+		}
+		else if (month == 6)
+		{
+			first_day = (6 + offset)%7;
+			month_length = 31;
+		}
+		else if (month == 7)
+		{
+			first_day = (2 + offset)%7;
+			month_length = 31;
+		}
+		else if (month == 8)
+		{
+			first_day = (5 + offset)%7;
+			month_length = 30;
+		}
+		else if (month == 9)
+		{
+			first_day = (0 + offset)%7;
+			month_length = 31;
+		}
+		else if (month == 10)
+		{
+			first_day = (3 + offset)%7;
+			month_length = 30;
+		}
+		else if (month == 11)
+		{
+			first_day = (5 + offset)%7;
+			month_length = 31;
+		}
+			
 		var list = document.getElementById("for_month");
 		list.innerHTML = "";
-		for(var i = 0; i <= month_length; i++)
-		{
+		
+		for(j = 0; j < first_day -1; j++)
+			{
+				var item = document.createElement('li');
+				list.appendChild(item);
+			}
+			
+		for(var i = 1; i < month_length; i++)
+		{	
 			var item = document.createElement('li');
-			var button = document.createElement("button");
+			var button = document.createElement("div");
 			button.innerHTML = i;
 			var str_i = "";
 			var str_m = "";
@@ -282,7 +364,7 @@
 		var list2 = document.getElementById("current_month");
 		list2.innerHTML = "";
 		var item2 = document.createElement('li');
-		item2.appendChild(document.createTextNode(monthNames[month]));
+		item2.appendChild(document.createTextNode(monthNames[month] + " " + (offset + 2017)));
 		list2.appendChild(item2);
 	}
 </script>
