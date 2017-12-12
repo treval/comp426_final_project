@@ -216,3 +216,15 @@ inset 0 1.5em 1em rgba(0,0,0,0.3);
 #event_list_header {
   margin-left: 330px;
 }
+
+.event_div {
+  border: thin solid black;
+}
+
+.event_div:hover {
+  background-color: lightgray;
+}
+
+.selected {
+  background-color: purple;
+}
