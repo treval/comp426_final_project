@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Base CSS and HTML Taken from here https://www.w3schools.com/howto/howto_css_calendar.asp -->
+
 <head>
-	<title>Current Events</title>
+	<title class = "title">Current Events</title>
+	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -21,7 +24,32 @@
     	text-align: center;
 		font-size: 35px;
 		color: #800000;
+		background-color: #BC8F8F;
+		opacity: 0.8;
 		font-family: "Palanquin", Times, serif;
+			}
+	h1 
+			{
+		text-indent: 10px;
+		font-size: 35px;
+		color: #800000;
+		opacity: 0.8;
+		font-family: "Palanquin", Times, serif;	
+			}
+	input
+			{
+		opacity: 0.8;
+			}
+	textarea:focus, input:focus
+			{
+		outline-color: #800000;
+			}
+	#event_set_div
+			{
+		font-size: 16px;
+		color: #800000;
+		opacity: 0.9;
+		font-family: "Palanquin", Times, serif;	
 			}
 	.month ul {
     	margin: 0;
@@ -38,21 +66,20 @@
 	.weekdays {
     	margin: 0;
     	padding: 10px 0;
-    	background-color: #ddd;
+    	background-color: #d5e7d5;
+		opacity: 0.8;
+		color: #800000;
 			}
 	.weekdays li {
     	display: inline-block;
     	width: 13.6%;
-    	color: #666;
     	text-align: center;
 			}
 	.days {
     	padding: 10px 0;
-    	background: #eee;
+    	background-color: #BC8F8F;
+		opacity: 0.8;
     	margin: 0;
-			}
-	.day {
-			cursor: pointer;
 			}
 	.days li {
 		cursor: pointer;
@@ -62,7 +89,7 @@
     	text-align: center;
     	margin-bottom: 5px;
     	font-size:12px;
-    	color: #777;
+    	color: #800000;
 			}
 			/* Add media queries for smaller screens */
 	@media screen and (max-width:720px) {
@@ -121,6 +148,7 @@
 <div class="content">
 
 <h1>Current Events</h1>
+<br>
 
 <div class="month">
   <ul>
@@ -147,6 +175,7 @@
 <ul>
 <div id="event_set_div">
             <form onsubmit = "return false;" id="new_event_form">
+			<br><br>
 			Create Event <br><br>
 			  Time: <br>
               <input name='time' type=time id = 'theTime'><br>
@@ -212,31 +241,37 @@
 	events = []; //events in an mmdd format
 	month_days();
 	
-	var selected_date;
+	var selected_date = null;
 	
 	function event_form() // pass name, type, date, desc
 	{	
-	
+		if(selected_date == null){window.alert("Please select a Date");}
+		else if(document.getElementById("theTime").value === ""){window.alert("Please select a Time");}
+		else if(document.getElementById("name").value === ""){window.alert("Please enter a Name");}
+		else if(document.getElementById("type").value === ""){window.alert("Please enter an Event Type");}
+		else if(document.getElementById("desc").value === ""){window.alert("Please enter a Description");}
+		else
+		{
 			var serialized = "name=" + document.getElementById("name").value.toString() + "&" +
 			"scheduled=" + this.selected_date.toString() + " " + document.getElementById("theTime").value.toString() + ":00" + "&" +
 			"type=" + document.getElementById("type").value.toString() + "&" +
 			"description=" + document.getElementById("desc").value.toString();
 			
 			
-		$.ajax(url_base + "/event.php",
-		{
-			type: "POST",
-			dataType: "json",
-			data: serialized,
-
-			success: function(serialized, status, jqXHR) 
+			$.ajax(url_base + "/event.php",
 			{
-				var e = new Event(serialized);
-				$('.'+ selected_date.toString() + "li").append(e.makeCollapseEvent());
-			},
-			error: function(exception){alert('Exception:'+exception);}
-		});	
-			console.log(serialized);
+				type: "POST",
+				dataType: "json",
+				data: serialized,
+
+				success: function(serialized, status, jqXHR) 
+				{
+					var e = new Event(serialized);
+					$('.'+ selected_date.toString() + "li").append(e.makeCollapseEvent());
+				},
+				error: function(exception){alert('Exception:'+exception);}
+			});	
+		}
 	}
 	
 	function next_month()
@@ -258,11 +293,13 @@
 	{
 		if(month > 0)
 		{
+			selected_date = null;
 			month = month - 1;
 			month_days();
 		}
 		else if(offset > 0)
 		{
+			selected_date = null;
 			offset = offset-1;
 			month = 11;
 			leapYears = ~~((offset+1)/4);
@@ -272,7 +309,26 @@
 	}
 	function create_event(button_id)
 	{
-		 selected_date = button_id.toString();
+		 if(selected_date == null)
+		 {
+			selected_date = button_id.toString();
+			document.getElementById(selected_date).style.backgroundColor = '#800000';
+			document.getElementById(selected_date).style.color = '#d5e7d5';
+		 }
+		 else if(selected_date != button_id.toString())
+		 {
+			document.getElementById(selected_date).style.backgroundColor = '';
+			document.getElementById(selected_date).style.color = '#800000';
+			selected_date = button_id.toString();
+			document.getElementById(selected_date).style.backgroundColor = '#800000';
+			document.getElementById(selected_date).style.color = '#d5e7d5';
+		 }
+		 else
+		 {
+			document.getElementById(selected_date).style.backgroundColor = '';
+			document.getElementById(selected_date).style.color = '#800000';
+			selected_date = null;
+		 }
 		
 	}
 	function month_days(){
