@@ -143,6 +143,9 @@ body {
 
 .event_list {
   border: thin solid black;
+  width: 200px;
+  height: 300px;
+  overflow-y: scroll;
 }
 
 #thumbHolder{
@@ -210,3 +213,18 @@ box-shadow: inset 0 1px 1px rgba(255,255,255,0.2),
 inset 0 1.5em 1em rgba(0,0,0,0.3);
 }
 
+#event_list_header {
+  margin-left: 330px;
+}
+
+.event_div {
+  border: thin solid black;
+}
+
+.event_div:hover {
+  background-color: lightgray;
+}
+
+.selected {
+  background-color: purple;
+}

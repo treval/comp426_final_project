@@ -4,10 +4,7 @@ $(document).ready(function(){
       interval: 6000
     });
 	
-	
-	
 	$(".mainCarousel").carousel("next");
-	
 	
 	//thumbnail handlers
 	$("#item1").click(function(){
@@ -97,6 +94,4 @@ $(document).ready(function(){
 	$("#item29").click(function(){
 		$("#mainCarousel").carousel(28);
 	});
-
-
 });

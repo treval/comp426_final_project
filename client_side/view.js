@@ -107,7 +107,7 @@ $(document).ready(function () {
   $('[data-toggle="offcanvas"]').click(function () {
     $('#wrapper').toggleClass('toggled');
   });  
-  $().data()
+
 });
 
 
@@ -139,13 +139,8 @@ Event.prototype.makeCollapseEvent = function() {
 
   var event_div = $("<div class='event_div'></div>");
 
-  var title_div = $("<div></div>");
-  title_div.addClass('title');
-  title_div.html(this.name+" "+this.scheduled + " <span class='caret'></span>");
-
-  event_div.append(title_div);
-  event_div.append("<div id='new_user_div'><form id='new_user_form'><input name='first' type=text><br><input name='last' type=text><br><input name='email' type=text><br><button type=submit>Create</button></form></div>");
-
+  event_div.html(this.name+" "+this.scheduled+"<br>"+this.description);
+  
   event_div.data('event', this);
   return event_div;
 
