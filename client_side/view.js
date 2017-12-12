@@ -141,10 +141,10 @@ Event.prototype.makeCollapseEvent = function() {
 
   var title_div = $("<div></div>");
   title_div.addClass('title');
-  title_div.html(this.name+" "+this.scheduled + " <span class='caret'></span>");
+  title_div.html(this.name+" "+this.scheduled);
 
   event_div.append(title_div);
-  event_div.append("<div id='new_user_div'><form id='new_user_form'><input name='first' type=text><br><input name='last' type=text><br><input name='email' type=text><br><button type=submit>Create</button></form></div>");
+  event_div.append("<div id='new_user_div'><form id='new_user_form'><input name='first' type=text><br><input name='last' type=text><br><input name='email' type=text><br><button type=submit>Submit</button></form></div>");
 
   event_div.data('event', this);
   return event_div;
