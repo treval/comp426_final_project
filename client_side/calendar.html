@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--<script src="view.js"></script>-->
+	<script src="view.js"></script>
 
 	<style>
 	* {box-sizing: border-box;}
@@ -165,7 +165,7 @@
 	var first_day;
 	var date = new Date();
 	var offset = date.getFullYear() - 2017;
-	console.log(offset.toString());
+	var leapYears = ~~((offset+1)/4);
 
 	var Event = function(event_json) {
 		this.id = event_json.id;
@@ -249,6 +249,7 @@
 			else
 			{
 				offset = offset+1;
+				leapYears = ~~((offset+1)/4);
 				month = 0;
 				month_days();
 			}
@@ -264,6 +265,7 @@
 		{
 			offset = offset-1;
 			month = 11;
+			leapYears = ~~((offset+1)/4);
 			month_days();
 		}
 		
@@ -276,69 +278,69 @@
 	function month_days(){
 		if (month == 0)
 		{
-			first_day = (0 + offset)%7;
+			first_day = (6 + offset + leapYears)%7;
 			month_length = 31;
 		}
 		else if (month == 1)
 		{
-			first_day = (3 + offset)%7;
+			first_day = (2 + offset + leapYears)%7;
 			month_length = 28;
 		}		
 		else if (month == 2)
 		{
-			first_day = (3 + offset)%7;
+			first_day = (2 + offset + leapYears)%7;
 			month_length = 31;
 		}
 		else if (month == 3)
 		{
-			first_day = (6 + offset)%7;
+			first_day = (5 + offset + leapYears)%7;
 			month_length = 30;
 		}
 		else if (month == 4)
 		{
-			first_day = (1 + offset)%7;
+			first_day = (0 + offset + leapYears)%7;
 			month_length = 31;
 		}
 		else if (month == 5)
 		{
-			first_day = (4 + offset)%7;
+			first_day = (3 + offset + leapYears)%7;
 			month_length = 30;
 		}
 		else if (month == 6)
 		{
-			first_day = (6 + offset)%7;
+			first_day = (5 + offset + leapYears)%7;
 			month_length = 31;
 		}
 		else if (month == 7)
 		{
-			first_day = (2 + offset)%7;
+			first_day = (1 + offset + leapYears)%7;
 			month_length = 31;
 		}
 		else if (month == 8)
 		{
-			first_day = (5 + offset)%7;
+			first_day = (4 + offset + leapYears)%7;
 			month_length = 30;
 		}
 		else if (month == 9)
 		{
-			first_day = (0 + offset)%7;
+			first_day = (6 + offset + leapYears)%7;
 			month_length = 31;
 		}
 		else if (month == 10)
 		{
-			first_day = (3 + offset)%7;
+			first_day = (2 + offset + leapYears)%7;
 			month_length = 30;
 		}
 		else if (month == 11)
 		{
-			first_day = (5 + offset)%7;
+			first_day = (4 + offset + leapYears)%7;
 			month_length = 31;
 		}
 			
 		var list = document.getElementById("for_month");
 		list.innerHTML = "";
 		
-		for(j = 0; j < first_day -1; j++)
+		for(j = 0; j < first_day; j++)
 			{
 				var item = document.createElement('li');
 				list.appendChild(item);
